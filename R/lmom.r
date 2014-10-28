@@ -1665,7 +1665,11 @@ lmrd<-function(x, y, distributions = "GLO GEV GPA GNO PE3", twopar,
                pch.dist = 23,
                cex.dist = 1,
                bg.dist = "black",
-               col.dist = "black", ...) {
+               col.dist = "black",
+               col.data = "black",
+               pch.data = "black",
+               cex.data = 1,
+               ...) {
 ## Function lmrd() -- draws an L-moment ratio diagram
 # Check arguments
 #
@@ -1755,7 +1759,7 @@ lmrd<-function(x, y, distributions = "GLO GEV GPA GNO PE3", twopar,
   if (!x.missing) {
     if (missing(cex)) cex<-NULL
     if (!missing(col) && length(col)==1) points(x,y,pch=pch,cex=cex,col=col)
-    else points(x,y,pch=pch,cex=cex)
+    else points(x,y,pch=pch.data,cex=cex.data, col=col.data)
   }
 }
 
