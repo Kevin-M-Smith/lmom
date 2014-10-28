@@ -1699,7 +1699,7 @@ lmrd<-function(x, y, distributions = "GLO GEV GPA GNO PE3", twopar,
   if (missing(xlim)) xlim<-range(0,0.6,x,na.rm=TRUE)
   if (missing(ylim)) ylim<-range(0,0.4,y,na.rm=TRUE)
   if (length(distributions)==0) {
-    matplot(0,0,type="n",xlim=xlim,ylim=ylim,xlab=xlab,ylab=ylab,frame.plot=FALSE,...)
+    matplot(0,0,type="n",xlim=xlim,ylim=ylim,xlab=xlab,ylab=ylab,frame.plot=FALSE,frame.plot=FALSE,...)
     legend.lmrd<-FALSE
   } else {
    col.lines <- if (!missing(col) && (x.missing || length(col)>1)) col else lmrd.3par$col[matchdist]
