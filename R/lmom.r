@@ -1674,7 +1674,6 @@ lmrd<-function(x, y, distributions = "GLO GEV GPA GNO PE3", twopar,
 ## Function lmrd() -- draws an L-moment ratio diagram
 # Check arguments
 #
-  grid:::grid.roundrect(gp=grid:::gpar(fill = col.plot, col = col.plot.border))
   x.missing<-missing(x)
   if (x.missing) { x<-y<-numeric(0) }
   else if (missing(y)) {
@@ -1763,6 +1762,7 @@ lmrd<-function(x, y, distributions = "GLO GEV GPA GNO PE3", twopar,
     if (!missing(col) && length(col)==1) points(x,y,pch=pch,cex=cex,col=col)
     else points(x,y,pch=pch.data,cex=cex.data, col=col.data)
   }
+  grid:::grid.roundrect(gp=grid:::gpar(fill = col.plot, col = col.plot.border))
 }
 
 make.words<-function(astring)
