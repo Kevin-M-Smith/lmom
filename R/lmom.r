@@ -1713,7 +1713,7 @@ lmrd<-function(x, y, distributions = "GLO GEV GPA GNO PE3", twopar,
 #
   fg<-list(...)$fg
   if (is.null(fg)) fg<-par("fg")
-  box(col=fg)
+  box(col="white")
   abline(h=0,v=0,col=fg)
 #
 # Two-parameter distributions
@@ -1725,7 +1725,7 @@ lmrd<-function(x, y, distributions = "GLO GEV GPA GNO PE3", twopar,
       lmrd.2par$tau3[match2]>=pu[1] & lmrd.2par$tau3[match2]<=pu[2] &
       lmrd.2par$tau4[match2]>=pu[3] & lmrd.2par$tau4[match2]<=pu[4] )
     # Plot the points, don't clip at axis box
-    points(lmrd.2par$tau3[match2],lmrd.2par$tau4[match2],pch=15,col="black",xpd=TRUE)
+    points(lmrd.2par$tau3[match2],lmrd.2par$tau4[match2], pch=23, cex=3, bg="black", col="black",xpd=TRUE)
     text(lmrd.2par$tau3[match2],lmrd.2par$tau4[match2],
          lmrd.2par$text[match2],adj=c(-0.5,-0.25),xpd=TRUE)
   }
