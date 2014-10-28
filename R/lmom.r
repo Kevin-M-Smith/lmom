@@ -1658,7 +1658,14 @@ lmrd<-function(x, y, distributions = "GLO GEV GPA GNO PE3", twopar,
                xlim, ylim, pch=3, cex, col, lty, lwd=1,
                legend.lmrd = TRUE, xlegend, ylegend,
                xlab = expression(italic(L) * "-skewness"),
-               ylab = expression(italic(L) * "-kurtosis"), ...) {
+               ylab = expression(italic(L) * "-kurtosis"),
+               col.lab = "black",
+               col.origin = "black",
+               col.box = "black", 
+               pch.dist = 23,
+               cex.dist = 1,
+               bg.dist = "black",
+               col.dist = "black", ...) {
 ## Function lmrd() -- draws an L-moment ratio diagram
 # Check arguments
 #
@@ -1699,13 +1706,13 @@ lmrd<-function(x, y, distributions = "GLO GEV GPA GNO PE3", twopar,
   if (missing(xlim)) xlim<-range(0,0.6,x,na.rm=TRUE)
   if (missing(ylim)) ylim<-range(0,0.4,y,na.rm=TRUE)
   if (length(distributions)==0) {
-    matplot(0,0,type="n",col.lab="white",xlim=xlim,ylim=ylim,xlab=xlab,ylab=ylab,frame.plot=FALSE,...)
+    matplot(0,0,type="n",col.lab=col.lab,xlim=xlim,ylim=ylim,xlab=xlab,ylab=ylab,frame.plot=FALSE,...)
     legend.lmrd<-FALSE
   } else {
    col.lines <- if (!missing(col) && (x.missing || length(col)>1)) col else lmrd.3par$col[matchdist]
    if (missing(lty)) lty<-lmrd.3par$lty[matchdist]
    matplot(round(lmrd.data[,1],2), lmrd.data[,toupper(distributions)], type="l",
-     xlim=xlim, ylim=ylim, xlab=xlab, ylab=ylab, col.lab="white", col=col.lines, lty=lty, lwd=lwd,
+     xlim=xlim, ylim=ylim, xlab=xlab, ylab=ylab, col.lab=col.lab, col=col.lines, lty=lty, lwd=lwd,
      frame.plot=FALSE, ...)
   }
 #
@@ -1713,8 +1720,8 @@ lmrd<-function(x, y, distributions = "GLO GEV GPA GNO PE3", twopar,
 #
   fg<-list(...)$fg
   if (is.null(fg)) fg <- "white"
-  box(col="white")
-  abline(h=0,v=0,col="white")
+  box(col=col.box)
+  abline(h=0,v=0,col=col.origin)
 #
 # Two-parameter distributions
 #
@@ -1725,7 +1732,7 @@ lmrd<-function(x, y, distributions = "GLO GEV GPA GNO PE3", twopar,
       lmrd.2par$tau3[match2]>=pu[1] & lmrd.2par$tau3[match2]<=pu[2] &
       lmrd.2par$tau4[match2]>=pu[3] & lmrd.2par$tau4[match2]<=pu[4] )
     # Plot the points, don't clip at axis box
-    points(lmrd.2par$tau3[match2],lmrd.2par$tau4[match2], pch=23, cex=3, bg="black", col="black",xpd=TRUE)
+    points(lmrd.2par$tau3[match2],lmrd.2par$tau4[match2], pch=pch.dist, cex=cex.dist, bg=bg.dist, col=col.dist,xpd=TRUE)
     text(lmrd.2par$tau3[match2],lmrd.2par$tau4[match2],
          lmrd.2par$text[match2],adj=c(-0.5,-0.25),xpd=TRUE)
   }
