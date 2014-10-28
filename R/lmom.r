@@ -1712,9 +1712,9 @@ lmrd<-function(x, y, distributions = "GLO GEV GPA GNO PE3", twopar,
 # Framing elements of plot (box, lines at x=0 and y=0)
 #
   fg<-list(...)$fg
-  if (is.null(fg)) fg<-par("fg")
+  if (is.null(fg)) fg <- "white"
   box(col="white")
-  abline(h=0,v=0,col=fg)
+  abline(h=0,v=0,col="white")
 #
 # Two-parameter distributions
 #
