@@ -1705,7 +1705,7 @@ lmrd<-function(x, y, distributions = "GLO GEV GPA GNO PE3", twopar,
    col.lines <- if (!missing(col) && (x.missing || length(col)>1)) col else lmrd.3par$col[matchdist]
    if (missing(lty)) lty<-lmrd.3par$lty[matchdist]
    matplot(round(lmrd.data[,1],2), lmrd.data[,toupper(distributions)], type="l",
-     xlim=xlim, ylim=ylim, xlab=xlab, ylab=ylab, col=col.lines, lty=lty, lwd=lwd,
+     xlim=xlim, ylim=ylim, xlab=xlab, ylab=ylab, col=col.lines, frame.plot=FALSE, lty=lty, lwd=lwd,
      frame.plot=FALSE, ...)
   }
 #
