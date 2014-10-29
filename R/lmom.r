@@ -1748,8 +1748,8 @@ lmrd<-function(x, y, distributions = "GLO GEV GPA GNO PE3", twopar,
   if (isTRUE(legend.lmrd)) legend.lmrd<-list()
   if (is.list(legend.lmrd)) {
     parusr<-par("usr")
-    if (missing(xlegend)) xlegend<-0.05
-    if (missing(ylegend)) ylegend<-0.1
+    if (missing(xlegend)) xlegend<-parusr[1]+0.01*(parusr[2]-parusr[1])
+    if (missing(ylegend)) ylegend<-parusr[4]-0.01*(parusr[4]-parusr[3])*par("pin")[1]/par("pin")[2]
     legend.args<-list(x=xlegend,y=ylegend,legend=toupper(distributions),
       bty="n",col=col.lines,lty=lty,lwd=lwd)
     legend.args[names(legend.lmrd)]<-legend.lmrd
