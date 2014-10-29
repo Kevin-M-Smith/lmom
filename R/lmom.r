@@ -1670,7 +1670,8 @@ lmrd<-function(x, y, distributions = "GLO GEV GPA GNO PE3", twopar,
                pch.data = "black",
                cex.data = 1,
                col.plot = "white",
-               col.plot.border = "black", ...) {
+               col.plot.border = "black",
+               rect = FALSE, ...) {
 ## Function lmrd() -- draws an L-moment ratio diagram
 # Check arguments
 #
@@ -1762,7 +1763,7 @@ lmrd<-function(x, y, distributions = "GLO GEV GPA GNO PE3", twopar,
     if (!missing(col) && length(col)==1) points(x,y,pch=pch,cex=cex,col=col)
     else points(x,y,pch=pch.data,cex=cex.data, col=col.data)
   }
-  grid:::grid.roundrect(gp=grid:::gpar(fill = col.plot, col = col.plot.border))
+  if(rect) grid:::grid.roundrect(gp=grid:::gpar(fill = col.plot, col = col.plot.border))
 }
 
 
@@ -1851,7 +1852,7 @@ lmrd2<-function(x, y, distributions = "LN2 GA2 WB2 GP2",
     if (!missing(col) && length(col)==1) points(x,y,pch=pch,cex=cex,col=col)
     else points(x,y,pch=pch.data,cex=cex.data, col=col.data)
   }
-  grid:::grid.roundrect(gp=grid:::gpar(fill = col.plot, col = col.plot.border))
+  if(rect) grid:::grid.roundrect(gp=grid:::gpar(fill = col.plot, col = col.plot.border))
 }
 
 
