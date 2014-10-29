@@ -1740,7 +1740,7 @@ lmrd<-function(x, y, distributions = "GLO GEV GPA GNO PE3", twopar,
     # Plot the points, don't clip at axis box
     points(lmrd.2par$tau3[match2],lmrd.2par$tau4[match2], pch=pch.dist, cex=cex.dist, bg=bg.dist, col=col.dist,xpd=TRUE)
     text(lmrd.2par$tau3[match2],lmrd.2par$tau4[match2],
-         lmrd.2par$text[match2],adj=c(-0.5,-0.25),xpd=TRUE)
+         lmrd.2par$text[match2],adj=c(-1,-1),xpd=TRUE)
   }
 #
 # Legend
