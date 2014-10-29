@@ -1766,6 +1766,95 @@ lmrd<-function(x, y, distributions = "GLO GEV GPA GNO PE3", twopar,
 }
 
 
+lmrd2<-function(x, y, distributions = "LN2 GA2 WB2 GP2",               
+               xlim, ylim, pch=3, cex, col, lty, lwd=1,
+               legend.lmrd = TRUE, xlegend, ylegend,
+               xlab = expression(italic(L) * "-skewness"),
+               ylab = expression(italic(L) * "-CV"),
+               col.lab = "black",
+               col.origin = "black",
+               col.box = "black", 
+               col.data = "black",
+               pch.data = "black",
+               cex.data = 1,
+               col.plot = "white",
+               col.plot.border = "black", ...) {
+  ## Function lmrd() -- draws an L-moment ratio diagram
+  # Check arguments
+  #
+  x.missing<-missing(x)
+  if (x.missing) { x<-y<-numeric(0) }
+  else if (missing(y)) {
+    y<-NULL
+    if (inherits(x,"regdata")) {
+      y<-x[[6]]; x<-x[[5]]
+    } else if (length(dim(x))==2) {
+      dn2<-dimnames(x)[[2]]
+      mm<-match(c("l_1","l_2","t_3"),dn2)
+      if (any(is.na(mm))) mm<-match(c("l_1","l_2","t_3"),dn2)
+      if (!any(is.na(mm))) { y<-x[,mm[2] ]; x<-x[,mm[1] ] }
+    } else if (is.numeric(x)) {
+      nx<-names(x)
+      mm<-match(c("l_1", "l_2", "t_3"),nx)
+      if (any(is.na(mm))) mm<-match(c("l_1","l_2","t_3"),nx)
+      if (!any(is.na(mm))) { y<-x[mm[2] ]; x<-x[mm[1] ] }
+    }
+    if (is.null(y))
+      stop("could not find L-skewness and L-CV values in 'x'")
+  }
+  if (identical(as.logical(distributions),FALSE)) distributions<-""
+  if (length(distributions)==1) distributions<-make.words(distributions)
+  matchdist<-match(toupper(distributions),lmrd.2parL$distributions)
+  if (any(is.na(matchdist))) stop("unknown distribution(s) ",
+                                  paste(distributions[is.na(matchdist)],collapse=" "))
+  #
+  # Two-parameter distributions
+  #
+  if (missing(xlim)) xlim<-range(0,0.6,x,na.rm=TRUE)
+  if (missing(ylim)) ylim<-range(0,0.4,y,na.rm=TRUE)
+  if (length(distributions)==0) {
+    matplot(0,0,type="n",col.lab=col.lab,xlim=xlim,ylim=ylim,xlab=xlab,ylab=ylab,frame.plot=FALSE,...)
+    legend.lmrd<-FALSE
+  } else {
+    col.lines <- if (!missing(col) && (x.missing || length(col)>1)) col else lmrd.2parL$col[matchdist]
+    if (missing(lty)) lty<-lmrd.2parL$lty[matchdist]
+    matplot(round(lmrd.2param.data[,1],2), lmrd.2param.data[,toupper(distributions)], type="l",
+            xlim=xlim, ylim=ylim, xlab=xlab, ylab=ylab, col.lab=col.lab, col=col.lines, lty=lty, lwd=lwd,
+            frame.plot=FALSE, ...)
+  }
+  #
+  # Framing elements of plot (box, lines at x=0 and y=0)
+  #
+  fg<-list(...)$fg
+  if (is.null(fg)) fg <- "white"
+  box(col=col.box)
+  abline(h=0,v=0,col=col.origin)
+
+  #
+  # Legend
+  #
+  if (isTRUE(legend.lmrd)) legend.lmrd<-list()
+  if (is.list(legend.lmrd)) {
+    parusr<-par("usr")
+    if (missing(xlegend)) xlegend<-parusr[1]+0.01*(parusr[2]-parusr[1])
+    if (missing(ylegend)) ylegend<-parusr[4]-0.01*(parusr[4]-parusr[3])*par("pin")[1]/par("pin")[2]
+    legend.args<-list(x=xlegend,y=ylegend,legend=toupper(distributions),
+                      bty="n",col=col.lines,lty=lty,lwd=lwd)
+    legend.args[names(legend.lmrd)]<-legend.lmrd
+    do.call(legend,legend.args)
+  }
+  #
+  # Data points
+  #
+  if (!x.missing) {
+    if (missing(cex)) cex<-NULL
+    if (!missing(col) && length(col)==1) points(x,y,pch=pch,cex=cex,col=col)
+    else points(x,y,pch=pch.data,cex=cex.data, col=col.data)
+  }
+  grid:::grid.roundrect(gp=grid:::gpar(fill = col.plot, col = col.plot.border))
+}
+
+
 
 
 
