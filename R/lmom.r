@@ -1779,7 +1779,8 @@ lmrd2<-function(x, y, distributions = "LN2 GA2 WB2 GP2",
                pch.data = "black",
                cex.data = 1,
                col.plot = "white",
-               col.plot.border = "black", ...) {
+               col.plot.border = "black",
+               rect = FALSE, ...) {
   ## Function lmrd() -- draws an L-moment ratio diagram
   # Check arguments
   #
