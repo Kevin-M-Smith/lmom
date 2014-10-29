@@ -1794,12 +1794,12 @@ lmrd2<-function(x, y, distributions = "LN2 GA2 WB2 GP2",
       dn2<-dimnames(x)[[2]]
       mm<-match(c("l_1","l_2","t_3"),dn2)
       if (any(is.na(mm))) mm<-match(c("l_1","l_2","t_3"),dn2)
-      if (!any(is.na(mm))) { y<-x[,mm[2] ]; x<-x[,mm[1] ] }
+      if (!any(is.na(mm))) { y<-x[,mm[2]]/x[,mm[1]]; x<-x[,mm[3] ] }
     } else if (is.numeric(x)) {
       nx<-names(x)
       mm<-match(c("l_1", "l_2", "t_3"),nx)
       if (any(is.na(mm))) mm<-match(c("l_1","l_2","t_3"),nx)
-      if (!any(is.na(mm))) { y<-x[mm[2] ]; x<-x[mm[1] ] }
+      if (!any(is.na(mm))) { y<-x[,mm[2]]/x[,mm[1]]; x<-x[,mm[3]] }
     }
     if (is.null(y))
       stop("could not find L-skewness and L-CV values in 'x'")
